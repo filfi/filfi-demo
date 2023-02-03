@@ -1,0 +1,6 @@
+{
+  "extends": "./src/.umi/tsconfig.json",
+  "compilerOptions": {
+    "types": ["./src/.umi/typings"]
+  }
+}

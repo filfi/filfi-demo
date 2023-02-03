@@ -1,0 +1,33 @@
+@import './variables.less';
+
+html, body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+body {
+  --header-margin-y: .1px;
+
+  padding-top: calc(var(--header-margin-y) * 2 + 6rem);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+}
+
+@media screen and (min-width: 992px) {
+  body {
+    --header-margin-y: 1.25rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    --header-margin-y: 2.5rem;
+  }
+}

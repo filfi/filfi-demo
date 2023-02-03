@@ -1,0 +1,50 @@
+.modal {
+  --bs-modal-width: 22rem;
+  --bs-modal-color: var(--color-gray-500);
+  --bs-modal-border-color: var(--color-gray-300);
+  --bs-modal-border-radius: .75rem;
+  --bs-modal-header-padding: 1rem 1rem .5rem;
+  --bs-modal-header-border-width: 0;
+  --bs-modal-footer-gap: 0.75rem;
+  --bs-modal-footer-border-width: 0;
+
+  :global {
+    .modal-header {
+      flex-direction: column;
+    }
+
+    .modal-icon {
+      margin-bottom: 1rem;
+    }
+
+    .modal-title {
+      color: var(--text-main);
+      font-size: 1.125rem;
+      font-weight: 500;
+      line-height: 1.555;
+    }
+
+    .modal-body {
+      font-size: .875rem;
+      line-height: 1.4286;
+    }
+
+    .modal-header ~ .modal-body {
+      padding-top: 0;
+    }
+
+    .modal-footer {
+      flex-direction: column;
+      // padding: var(--bs-modal-padding);
+
+      > .btn {
+        width: 100%;
+        max-width: 20rem;
+      }
+    }
+
+    .modal-body ~ .modal-footer {
+      padding-top: calc(0.25rem - var(--bs-modal-footer-gap) * 0.5);
+    }
+  }
+}

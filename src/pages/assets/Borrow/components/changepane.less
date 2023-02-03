@@ -1,0 +1,94 @@
+.card {
+  --bs-card-spacer-x: 18px;
+  --bs-card-spacer-y: 32px;
+  --bs-card-bg: #E6EEFA;
+  --bs-card-border-width: 0;
+  --bs-card-border-radius: 12px;
+
+  :global {
+    .card-body {
+      padding-bottom: calc(var(--bs-card-spacer-y) * 0.75);
+    }
+
+    .card-title {
+      margin-bottom: 0.625rem;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+
+    input::-webkit-input-placeholder {
+      color: var(--color-gray-400);
+    }
+
+    .ant-input, .ant-input-group-addon {
+      background-color: unset;
+      border-width: 0;
+      border-radius: 0;
+    }
+
+    .ant-input {
+      padding: 0;
+      color: var(--text-main);
+      font-family: Inter;
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 44px;
+
+      &:hover, &:focus, &.ant-input-status-error:not(.ant-input-disabled):focus {
+        border-width: 0;
+        box-shadow: none;
+      }
+    }
+
+    .btn {
+      --bs-btn-border-radius: 8px;
+
+      box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
+    }
+
+    .ant-input-group-addon {
+      .btn {
+        --bs-btn-padding-x: .75rem;
+        --bs-btn-padding-y: .25rem;
+        --bs-btn-font-size: .875rem;
+        --bs-btn-font-weight: 400;
+        --bs-btn-line-height: 1.4286;
+        --bs-btn-color: var(--color-gray-400);
+        --bs-btn-border-color: var(--color-gray-400);
+        --bs-btn-border-radius: 0.25rem;
+        --bs-btn-hover-color: var(--color-gray-500);
+        --bs-btn-hover-border-color: var(--color-gray-500);
+        --bs-btn-active-color: var(--color-gray-600);
+        --bs-btn-active-border-color: var(--color-gray-600);
+
+        margin: 0 .25rem;
+      }
+    }
+
+    .btn-switch {
+      --bs-btn-padding-x: .25rem;
+      --bs-btn-padding-y: .25rem;
+      --bs-btn-line-height: 1;
+      --bs-btn-border-radius: 50%;
+      --bs-btn-color: var(--text-main);
+      --bs-btn-border-width: 0;
+      --bs-btn-bg: var(--color-gray-200);
+      --bs-btn-hover-bg: var(--color-gray-400);
+      --bs-btn-active-bg: var(--color-gray-400);
+    }
+  }
+}
+
+.unit {
+  color: var(--color-gray-400);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+}

@@ -1,0 +1,85 @@
+.card {
+  --bs-card-spacer-x: 1.5rem;
+  --bs-card-spacer-y: 1.5rem;
+  --bs-card-title-spacer-y: 0;
+  --bs-card-border-color: var(--color-gray-400);
+  --bs-card-border-radius: .75rem;
+
+  font-weight: 600;
+}
+
+.content {
+  padding: 0 0.625rem 0.625rem;
+}
+
+.cell-amount {
+  margin-bottom: 3rem;
+}
+
+.amount {
+  font-size: 2.25rem;
+}
+
+.label {
+  color: var(--color-gray-600);
+  font-size: 0.8125rem;
+}
+
+.unit {
+  margin-left: .5rem;
+  color: var(--color-neutral-4);
+  font-size: 0.875rem;
+  line-height: 2.285;
+}
+
+.decimal {
+  font-size: 1.125rem;
+  line-height: 2.1;
+}
+
+.subcard {
+  --bs-card-color: var(--color-gray-600);
+  --bs-card-spacer-x: 1.5rem;
+  --bs-card-spacer-y: 1.25rem;
+  --bs-card-cap-color: var(--color-gray-600);
+  --bs-card-cap-padding-x: 1.5rem;
+  --bs-card-cap-padding-y: 1.25rem;
+  --bs-card-title-spacer-y: .25rem;
+  --bs-card-border-color: #D0D5DD;
+  --bs-card-border-radius: .5rem;
+  --bs-card-box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
+
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.4285;
+  box-shadow: var(--bs-card-box-shadow);
+
+  :global {
+    .card-title {
+      color: var(--text-main);
+      font-size: 1.125rem;
+      font-weight: 700;
+      line-height: 1.555;
+    }
+
+    .card-text-lg {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .card-text-decimal {
+      color: var(--text-main);
+      font-size: 2.25rem;
+      font-weight: 600;
+      line-height: 1.2222;
+
+      .unit {
+        color: var(--color-neutral-4);
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.5;
+      }
+    }
+  }
+}
