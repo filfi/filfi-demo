@@ -1,6 +1,7 @@
 @import './variables.less';
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -9,7 +10,7 @@ html, body {
 }
 
 body {
-  --header-margin-y: .1px;
+  --header-margin-y: 0.1px;
 
   padding-top: calc(var(--header-margin-y) * 2 + 6rem);
   -webkit-font-smoothing: antialiased;
@@ -30,4 +31,8 @@ a {
   body {
     --header-margin-y: 2.5rem;
   }
+}
+
+.ff-layout-main .container {
+  max-width: calc(var(--bs-gutter-x, 0) + 50rem);
 }

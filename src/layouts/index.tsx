@@ -18,7 +18,9 @@ const BasicLayout: React.FC = () => {
     <>
       <Header />
 
-      <Outlet />
+      <main className="ff-layout-main">
+        <Outlet />
+      </main>
 
       <Footer />
     </>

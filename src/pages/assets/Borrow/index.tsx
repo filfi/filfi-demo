@@ -70,8 +70,12 @@ export default function Supply() {
         title: formatMessage({ id: 'notify.collateral.empty.title' }),
         content: (
           <>
-            <p><FormattedMessage id="notify.collateral.empty.tips.1" /></p>
-            <p className="mb-0"><FormattedMessage id="notify.collateral.empty.tips.2" /></p>
+            <p>
+              <FormattedMessage id="notify.collateral.empty.tips.1" />
+            </p>
+            <p className="mb-0">
+              <FormattedMessage id="notify.collateral.empty.tips.2" />
+            </p>
           </>
         ),
         confirmText: formatMessage({ id: 'notify.collateral.empty.action' }),
@@ -103,7 +107,10 @@ export default function Supply() {
     const v = +val;
     const { amount = 0 } = borrow ?? {};
 
-    setBorrow((data) => ({ ...data, amount: BigNumber(amount).plus(v).toNumber() }));
+    setBorrow((data) => ({
+      ...data,
+      amount: BigNumber(amount).plus(v).toNumber(),
+    }));
   };
 
   return (
@@ -115,7 +122,7 @@ export default function Supply() {
               <div className="col-12 col-lg-7">
                 <div className="d-flex align-items-center mb-4">
                   <DebtIcon />
-                  <h5 className="card-title ms-3">
+                  <h5 className={classNames('ms-3', styles.title)}>
                     <FormattedMessage id="pages.borrow.debts.title" />
                   </h5>
                 </div>
@@ -124,45 +131,59 @@ export default function Supply() {
                     <span className="me-1">
                       <FormattedMessage id="pages.borrow.debts.balance" />
                     </span>
-                    <a className="bi bi-exclamation-circle text-gray" href="#"></a>
+                    <a
+                      className="bi bi-exclamation-circle text-gray"
+                      href="#"
+                    ></a>
                   </p>
                   <p className={styles.cellAmount}>
-                    <span className={styles.amount}>{F.formatAmount(borrow?.amount)}</span>
+                    <span className={styles.amount}>
+                      {F.formatAmount(borrow?.amount)}
+                    </span>
                     <span className={styles.unit}>FIL</span>
                   </p>
-                  <div className="row row-cols-3">
-                    <div className="col">
+                  <div className="row row-cols-3 g-1">
+                    <div className="col d-flex flex-column">
                       <p className={classNames('mb-0', styles.label)}>
                         <span className="me-1">
                           <FormattedMessage id="pages.borrow.loan.total" />
                         </span>
-                        <a className="bi bi-exclamation-circle text-gray" href="#"></a>
+                        <a
+                          className="bi bi-exclamation-circle text-gray"
+                          href="#"
+                        ></a>
                       </p>
-                      <p className="mb-0">
+                      <p className="mb-0 mt-auto">
                         <span className={styles.decimal}>1.26</span>
                         <span className={styles.unit}>FIL</span>
                       </p>
                     </div>
-                    <div className="col">
+                    <div className="col d-flex flex-column">
                       <p className={classNames('mb-0', styles.label)}>
                         <span className="me-1">
                           <FormattedMessage id="pages.borrow.loan.remain" />
                         </span>
-                        <a className="bi bi-exclamation-circle text-gray" href="#"></a>
+                        <a
+                          className="bi bi-exclamation-circle text-gray"
+                          href="#"
+                        ></a>
                       </p>
-                      <p className="mb-0">
+                      <p className="mb-0 mt-auto">
                         <span className={styles.decimal}>56.643</span>
                         <span className={styles.unit}>FIL</span>
                       </p>
                     </div>
-                    <div className="col">
+                    <div className="col d-flex flex-column">
                       <p className={classNames('mb-0', styles.label)}>
                         <span className="me-1">
                           <FormattedMessage id="pages.borrow.loan.remain" />
                         </span>
-                        <a className="bi bi-exclamation-circle text-gray" href="#"></a>
+                        <a
+                          className="bi bi-exclamation-circle text-gray"
+                          href="#"
+                        ></a>
                       </p>
-                      <p className="mb-0">
+                      <p className="mb-0 mt-auto">
                         <span className={styles.decimal}>3.46</span>
                         <span className={styles.unit}>%</span>
                       </p>
@@ -170,21 +191,37 @@ export default function Supply() {
                   </div>
                 </div>
               </div>
-              <div className="vr px-0 d-none d-lg-block" style={{ marginLeft: '-1px' }}></div>
+              <div
+                className="vr px-0 d-none d-lg-block"
+                style={{ marginLeft: '-1px' }}
+              ></div>
               <div className="col-12 col-lg-5 d-flex flex-column">
                 {edit ? (
                   <div className="my-auto ps-3">
                     <EditPane onCancel={toggleEdit} onConfirm={handleConfirm} />
                   </div>
                 ) : (
-                  <div className="d-flex flex-column gap-3 h-100 justify-content-center px-5">
-                    <button className="btn btn-primary btn-lg" type="button" disabled={!borrow || borrow.amount === 0} onClick={handlePayback}>
+                  <div className="d-flex flex-column gap-3 h-100 justify-content-center px-4">
+                    <button
+                      className="btn btn-primary btn-lg"
+                      type="button"
+                      disabled={!borrow || borrow.amount === 0}
+                      onClick={handlePayback}
+                    >
                       <ArrowLeft />
-                      <span className="ms-2 align-middle"><FormattedMessage id="actions.button.payback" /> FIL</span>
+                      <span className="ms-2 align-middle">
+                        <FormattedMessage id="actions.button.payback" /> FIL
+                      </span>
                     </button>
-                    <button className="btn btn-secondary btn-lg" type="button" onClick={handleBorrow}>
+                    <button
+                      className="btn btn-secondary btn-lg"
+                      type="button"
+                      onClick={handleBorrow}
+                    >
                       <ArrowRight />
-                      <span className="ms-2 align-middle"><FormattedMessage id="actions.button.borrow" /></span>
+                      <span className="ms-2 align-middle">
+                        <FormattedMessage id="actions.button.borrow" />
+                      </span>
                     </button>
                   </div>
                 )}
@@ -207,11 +244,15 @@ export default function Supply() {
                       <div className="d-flex align-items-center">
                         <h5 className="card-title mb-0">{collateral.id}</h5>
                         <span className="ms-2 badge badge-success">
-                          <i className="badge-dot"></i><FormattedMessage id="states.collateral.1" />
+                          <i className="badge-dot"></i>
+                          <FormattedMessage id="states.collateral.1" />
                         </span>
                       </div>
                       <p className="mb-0">
-                        <FormattedMessage id="pages.collateral.node.period" values={{ days: collateral.days }} />
+                        <FormattedMessage
+                          id="pages.collateral.node.period"
+                          values={{ days: collateral.days }}
+                        />
                       </p>
                     </div>
                     <button className="btn btn-light" type="button">
@@ -239,14 +280,26 @@ export default function Supply() {
                       </div>
                       <div className="col">
                         {change ? (
-                          <ChangePane onCancel={toggleChange} onConfirm={handleAmount} />
+                          <ChangePane
+                            onCancel={toggleChange}
+                            onConfirm={handleAmount}
+                          />
                         ) : (
                           <div className="h-100 d-flex">
                             <div className="d-flex align-items-center ms-auto mt-auto">
-                              <span className={classNames('badge badge-lg', { 'badge-success': percent > 0 })}>
-                                <FormattedMessage id="pages.collateral.node.locked" /> {F.formatRate(percent)}%
+                              <span
+                                className={classNames('badge badge-lg', {
+                                  'badge-success': percent > 0,
+                                })}
+                              >
+                                <FormattedMessage id="pages.collateral.node.locked" />{' '}
+                                {F.formatRate(percent)}%
                               </span>
-                              <button className="ms-3 btn btn-light" type="button" onClick={toggleChange}>
+                              <button
+                                className="ms-3 btn btn-light"
+                                type="button"
+                                onClick={toggleChange}
+                              >
                                 <FormattedMessage id="pages.collateral.actions.change" />
                               </button>
                             </div>
@@ -272,7 +325,11 @@ export default function Supply() {
                         </a>
                       </p>
                     </div>
-                    <button className="btn btn-primary float-right" type="button" onClick={() => modal.current?.show()}>
+                    <button
+                      className="btn btn-primary float-right"
+                      type="button"
+                      onClick={() => modal.current?.show()}
+                    >
                       <span className="me-1">
                         <FormattedMessage id="actions.button.collateral" />
                       </span>
@@ -296,13 +353,19 @@ export default function Supply() {
       >
         <ul className="mb-0">
           <li>
-            <p><FormattedMessage id="tips.collateral.node.tips.1" /></p>
+            <p>
+              <FormattedMessage id="tips.collateral.node.tips.1" />
+            </p>
           </li>
           <li>
-            <p><FormattedMessage id="tips.collateral.node.tips.2" /></p>
+            <p>
+              <FormattedMessage id="tips.collateral.node.tips.2" />
+            </p>
           </li>
           <li>
-            <p className="mb-0"><FormattedMessage id="tips.collateral.node.tips.3" /></p>
+            <p className="mb-0">
+              <FormattedMessage id="tips.collateral.node.tips.3" />
+            </p>
           </li>
         </ul>
       </Modal>

@@ -35,8 +35,14 @@ export default function Supply() {
     const { amount = 0 } = pools ?? {};
     const { balance = 0 } = wallet ?? {};
 
-    setPools((data) => ({ ...data, amount: BigNumber(amount).plus(v).toNumber() }));
-    setWallet((data) => ({ ...data, balance: BigNumber(balance).minus(v).toNumber() }));
+    setPools((data) => ({
+      ...data,
+      amount: BigNumber(amount).plus(v).toNumber(),
+    }));
+    setWallet((data) => ({
+      ...data,
+      balance: BigNumber(balance).minus(v).toNumber(),
+    }));
   };
 
   return (
@@ -48,7 +54,7 @@ export default function Supply() {
               <div className="col-12 col-lg-7">
                 <div className="d-flex align-items-center mb-4">
                   <LineIcon />
-                  <h5 className="card-title ms-3">
+                  <h5 className={classNames('ms-3', styles.title)}>
                     <FormattedMessage id="pages.supply.card.title" />
                   </h5>
                 </div>
@@ -57,45 +63,59 @@ export default function Supply() {
                     <span className="me-1">
                       <FormattedMessage id="pages.supply.card.balance" />
                     </span>
-                    <a className="bi bi-exclamation-circle text-gray" href="#"></a>
+                    <a
+                      className="bi bi-exclamation-circle text-gray"
+                      href="#"
+                    ></a>
                   </p>
                   <p className={styles.cellAmount}>
-                    <span className={styles.amount}>{formatAmount(pools?.amount)}</span>
+                    <span className={styles.amount}>
+                      {formatAmount(pools?.amount)}
+                    </span>
                     <span className={styles.unit}>FIL</span>
                   </p>
-                  <div className="row row-cols-3">
-                    <div className="col">
+                  <div className="row row-cols-3 g-1">
+                    <div className="col d-flex flex-column">
                       <p className={classNames('mb-0', styles.label)}>
                         <span className="me-1">
                           <FormattedMessage id="pages.supply.income.today" />
                         </span>
-                        <a className="bi bi-exclamation-circle text-gray" href="#"></a>
+                        <a
+                          className="bi bi-exclamation-circle text-gray"
+                          href="#"
+                        ></a>
                       </p>
-                      <p className="mb-0">
+                      <p className="mb-0 mt-auto">
                         <span className={styles.decimal}>1.26</span>
                         <span className={styles.unit}>FIL</span>
                       </p>
                     </div>
-                    <div className="col">
+                    <div className="col d-flex flex-column">
                       <p className={classNames('mb-0', styles.label)}>
                         <span className="me-1">
                           <FormattedMessage id="pages.supply.income.total" />
                         </span>
-                        <a className="bi bi-exclamation-circle text-gray" href="#"></a>
+                        <a
+                          className="bi bi-exclamation-circle text-gray"
+                          href="#"
+                        ></a>
                       </p>
-                      <p className="mb-0">
+                      <p className="mb-0 mt-auto">
                         <span className={styles.decimal}>56.643</span>
                         <span className={styles.unit}>FIL</span>
                       </p>
                     </div>
-                    <div className="col">
+                    <div className="col d-flex flex-column">
                       <p className={classNames('mb-0', styles.label)}>
                         <span className="me-1">
                           <FormattedMessage id="pages.supply.income.rate" />
                         </span>
-                        <a className="bi bi-exclamation-circle text-gray" href="#"></a>
+                        <a
+                          className="bi bi-exclamation-circle text-gray"
+                          href="#"
+                        ></a>
                       </p>
-                      <p className="mb-0">
+                      <p className="mb-0 mt-auto">
                         <span className={styles.decimal}>18.2</span>
                         <span className={styles.unit}>%</span>
                       </p>
@@ -103,21 +123,37 @@ export default function Supply() {
                   </div>
                 </div>
               </div>
-              <div className="vr px-0 d-none d-lg-block" style={{ marginLeft: '-1px' }}></div>
+              <div
+                className="vr px-0 d-none d-lg-block"
+                style={{ marginLeft: '-1px' }}
+              ></div>
               <div className="col-12 col-lg-5 d-flex flex-column">
                 {edit ? (
                   <div className="my-auto ps-3">
                     <EditPane onCancel={toggle} onConfirm={handleConfirm} />
                   </div>
                 ) : (
-                  <div className="d-flex flex-column gap-3 h-100 justify-content-center px-5">
-                    <button className="btn btn-primary btn-lg" type="button" onClick={toggle}>
+                  <div className="d-flex flex-column gap-3 h-100 justify-content-center px-4">
+                    <button
+                      className="btn btn-primary btn-lg"
+                      type="button"
+                      onClick={toggle}
+                    >
                       <ArrowLeft />
-                      <span className="ms-2 align-middle"><FormattedMessage id="actions.button.deposit" /> FIL</span>
+                      <span className="ms-2 align-middle">
+                        <FormattedMessage id="actions.button.deposit" /> FIL
+                      </span>
                     </button>
-                    <button className="btn btn-secondary btn-lg" type="button" disabled={!pools || pools.amount === 0} onClick={handleWithdraw}>
+                    <button
+                      className="btn btn-secondary btn-lg"
+                      type="button"
+                      disabled={!pools || pools.amount === 0}
+                      onClick={handleWithdraw}
+                    >
                       <ArrowRight />
-                      <span className="ms-2 align-middle"><FormattedMessage id="actions.button.extract" /> FIL</span>
+                      <span className="ms-2 align-middle">
+                        <FormattedMessage id="actions.button.extract" /> FIL
+                      </span>
                     </button>
                   </div>
                 )}

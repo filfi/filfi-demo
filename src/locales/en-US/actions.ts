@@ -7,7 +7,7 @@ export default {
   'actions.button.deposit': 'Supply',
   'actions.button.extract': 'Withdraw',
   'actions.button.payback': 'Repay',
-  'actions.button.borrow': 'Flash Loan',
+  'actions.button.borrow': 'Borrow FIL',
   'actions.button.collateral': 'Collateralize',
   'actions.input.all': 'Fill all',
 };

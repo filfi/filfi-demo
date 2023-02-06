@@ -3,9 +3,23 @@
   --bs-card-spacer-y: 1.5rem;
   --bs-card-title-spacer-y: 0;
   --bs-card-border-color: var(--color-gray-400);
-  --bs-card-border-radius: .75rem;
+  --bs-card-border-radius: 0.75rem;
 
   font-weight: 600;
+
+  :global {
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .content {
@@ -26,7 +40,7 @@
 }
 
 .unit {
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   color: var(--color-neutral-4);
   font-size: 0.875rem;
   line-height: 2.285;
@@ -44,12 +58,12 @@
   --bs-card-cap-color: var(--color-gray-600);
   --bs-card-cap-padding-x: 1.5rem;
   --bs-card-cap-padding-y: 1.25rem;
-  --bs-card-title-spacer-y: .25rem;
-  --bs-card-border-color: #D0D5DD;
-  --bs-card-border-radius: .5rem;
+  --bs-card-title-spacer-y: 0.25rem;
+  --bs-card-border-color: #d0d5dd;
+  --bs-card-border-radius: 0.5rem;
   --bs-card-box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
 
-  font-size: .875rem;
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.4285;
   box-shadow: var(--bs-card-box-shadow);
