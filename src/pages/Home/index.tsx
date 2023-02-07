@@ -2,6 +2,7 @@ import renderHTML from 'react-render-html';
 import { FormattedMessage, history, useIntl } from '@umijs/max';
 
 import bg from './imgs/bg.png';
+import styles from './styles.less';
 import useWallet from '@/hooks/useWallet';
 import usePageMeta from '@/hooks/usePageMeta';
 import { ReactComponent as Filecoin } from './imgs/filecoin.svg';
@@ -28,9 +29,9 @@ export default function Welcome() {
 
   return (
     <div className="container text-center">
-      <div className="display-2 d-flex align-items-center justify-content-center">
-        <Filecoin />
-        <h2 className="d-inline display-2 fw-bold align-middle">
+      <div className={styles.hero}>
+        <Filecoin className={styles.icon} />
+        <h2 className={styles.title}>
           <FormattedMessage id="pages.home.hero.title" />
         </h2>
       </div>
