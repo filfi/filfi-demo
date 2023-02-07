@@ -1,16 +1,21 @@
 import classNames from 'classnames';
-import { getIntl } from '@umijs/max';
+import { useIntl } from '@umijs/max';
 import { Modal as BSModal } from 'bootstrap';
 import { useEventListener, useMount } from 'ahooks';
-import React, { useCallback, useImperativeHandle, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 
 import * as U from './utils';
-import Mounter from './mounter';
 import styles from './styles.less';
 import { ReactComponent as IconHelp } from './imgs/help.svg';
 import { ReactComponent as IconInfo } from './imgs/info.svg';
 import { ReactComponent as IconLock } from './imgs/lock.svg';
 import { ReactComponent as IconWarn } from './imgs/warn.svg';
+import { mountPortal, unmountPortal } from '@/helpers/app';
 
 export type ModalProps = {
   icon?: 'help' | 'info' | 'lock' | 'warn' | React.ReactNode;
@@ -33,19 +38,33 @@ export type ModalProps = {
   onConfirm?: () => void;
 };
 export type ModalAction = 'cancel' | 'confirm';
-export type AlertProps = Omit<ModalProps, 'cancelText' | 'showCancel' | 'showConfirm' | 'onCancel'>;
+export type AlertProps = Omit<
+  ModalProps,
+  'cancelText' | 'showCancel' | 'showConfirm' | 'onCancel'
+>;
 export type ConfirmProps = Omit<ModalProps, 'showCancel' | 'showConfirm'>;
-export type AlertOptions = Omit<AlertProps, 'children'> & { content?: React.ReactNode; }
-export type ConfirmOptions = Omit<ConfirmProps, 'children'> & { content?: React.ReactNode; }
-export type ModalStatic = React.ForwardRefExoticComponent<ModalProps & React.RefAttributes<ModalAttrs>> & {
-  Alert: React.ForwardRefExoticComponent<AlertProps & React.RefAttributes<ModalAttrs>>;
-  Confirm: React.ForwardRefExoticComponent<ConfirmProps & React.RefAttributes<ModalAttrs>>;
+export type AlertOptions = Omit<AlertProps, 'children'> & {
+  content?: React.ReactNode;
+};
+export type ConfirmOptions = Omit<ConfirmProps, 'children'> & {
+  content?: React.ReactNode;
+};
+export type ModalStatic = React.ForwardRefExoticComponent<
+  ModalProps & React.RefAttributes<ModalAttrs>
+> & {
+  Alert: React.ForwardRefExoticComponent<
+    AlertProps & React.RefAttributes<ModalAttrs>
+  >;
+  Confirm: React.ForwardRefExoticComponent<
+    ConfirmProps & React.RefAttributes<ModalAttrs>
+  >;
   alert: (msgOrOpts: string | AlertOptions) => ModalAttrs['hide'];
   confirm: (msgOrOpts: string | ConfirmOptions) => ModalAttrs['hide'];
 };
 
 function getModal(el: HTMLElement | React.RefObject<HTMLElement>) {
-  const _el = (el as React.RefObject<HTMLElement>).current ?? el as HTMLElement;
+  const _el =
+    (el as React.RefObject<HTMLElement>).current ?? (el as HTMLElement);
   if (_el) {
     let modal = BSModal.getInstance(_el);
 
@@ -55,29 +74,34 @@ function getModal(el: HTMLElement | React.RefObject<HTMLElement>) {
 
     return modal;
   }
-};
+}
 
-const ModalRender: React.ForwardRefRenderFunction<ModalAttrs, ModalProps> = ({
-  size,
-  title,
-  children,
-  bodyClassName,
-  dialogClassName,
-  cancelText,
-  confirmText,
-  showCancel,
-  fade = true,
-  icon = 'info',
-  centered = true,
-  showConfirm = true,
-  onHide,
-  onShow,
-  onShown,
-  onHidden,
-  onCancel,
-  onConfirm,
-}, ref?: React.Ref<ModalAttrs> | null) => {
+const ModalRender: React.ForwardRefRenderFunction<ModalAttrs, ModalProps> = (
+  {
+    size,
+    title,
+    children,
+    bodyClassName,
+    dialogClassName,
+    cancelText,
+    confirmText,
+    showCancel,
+    fade = true,
+    icon = 'info',
+    centered = true,
+    showConfirm = true,
+    onHide,
+    onShow,
+    onShown,
+    onHidden,
+    onCancel,
+    onConfirm,
+  },
+  ref?: React.Ref<ModalAttrs> | null,
+) => {
   const el = useRef<HTMLDivElement>(null);
+
+  const { formatMessage } = useIntl();
 
   const [action, setAction] = useState<ModalAction>();
 
@@ -107,13 +131,20 @@ const ModalRender: React.ForwardRefRenderFunction<ModalAttrs, ModalProps> = ({
   const _onHide = useCallback(() => onHide?.(), [onHide]);
   const _onHidden = useCallback(() => handleHidden?.(), [handleHidden]);
   const _onShow = useCallback(() => onShow?.(), [onShow]);
-  const _onShown = useCallback(() => (setAction(undefined), onShown?.()), [onShown]);
+  const _onShown = useCallback(
+    () => (setAction(undefined), onShown?.()),
+    [onShown],
+  );
 
-  useImperativeHandle(ref, () => ({
-    hide: handleHide,
-    show: handleShow,
-    toggle: handleToggle,
-  }), []);
+  useImperativeHandle(
+    ref,
+    () => ({
+      hide: handleHide,
+      show: handleShow,
+      toggle: handleToggle,
+    }),
+    [],
+  );
 
   useEventListener('hide.bs.modal', _onHide, { target: el });
   useEventListener('hidden.bs.modal', _onHidden, { target: el });
@@ -132,7 +163,7 @@ const ModalRender: React.ForwardRefRenderFunction<ModalAttrs, ModalProps> = ({
         return <IconWarn />;
       default:
         return icon ?? <IconInfo />;
-    };
+    }
   };
 
   const renderBtns = () => {
@@ -145,7 +176,9 @@ const ModalRender: React.ForwardRefRenderFunction<ModalAttrs, ModalProps> = ({
           className="btn btn-lg btn-primary"
           type="button"
           onClick={handleConfirm}
-        >{confirmText ?? getIntl().formatMessage({ id: 'actions.button.confirm' })}</button>
+        >
+          {confirmText ?? formatMessage({ id: 'actions.button.confirm' })}
+        </button>,
       );
     }
 
@@ -156,7 +189,9 @@ const ModalRender: React.ForwardRefRenderFunction<ModalAttrs, ModalProps> = ({
           className="btn btn-lg btn-light"
           type="button"
           onClick={handleCancel}
-        >{cancelText ?? getIntl().formatMessage({ id: 'actions.button.cancel' })}</button>
+        >
+          {cancelText ?? formatMessage({ id: 'actions.button.cancel' })}
+        </button>,
       );
     }
 
@@ -164,29 +199,40 @@ const ModalRender: React.ForwardRefRenderFunction<ModalAttrs, ModalProps> = ({
   };
 
   return (
-    <div ref={el} className={classNames('modal', styles.modal, { fade })} aria-hidden="true" aria-labelledby="modal" tabIndex={-1}>
+    <div
+      ref={el}
+      className={classNames('modal', styles.modal, { fade })}
+      aria-hidden="true"
+      aria-labelledby="modal"
+      tabIndex={-1}
+    >
       <div
-        className={classNames('modal-dialog', {
-          'modal-sm': size === 'sm',
-          'modal-lg': size === 'lg',
-          'modal-xl': size === 'xl',
-          'modal-dialog-centered': centered,
-        }, dialogClassName)}
+        className={classNames(
+          'modal-dialog',
+          {
+            'modal-sm': size === 'sm',
+            'modal-lg': size === 'lg',
+            'modal-xl': size === 'xl',
+            'modal-dialog-centered': centered,
+          },
+          dialogClassName,
+        )}
       >
         <div className="modal-content">
           <div className="modal-header">
             <div className="modal-icon">{renderIcon()}</div>
 
-            {U.isDef(title) && (U.isStr(title) ? (
-              <h1 className="modal-title text-center">{title}</h1>
-            ) : (title))}
+            {U.isDef(title) &&
+              (U.isStr(title) ? (
+                <h1 className="modal-title text-center">{title}</h1>
+              ) : (
+                title
+              ))}
           </div>
           <div className={classNames('modal-body', bodyClassName)}>
             {children}
           </div>
-          <div className="modal-footer">
-            {renderBtns()}
-          </div>
+          <div className="modal-footer">{renderBtns()}</div>
         </div>
       </div>
     </div>
@@ -196,39 +242,47 @@ const ModalRender: React.ForwardRefRenderFunction<ModalAttrs, ModalProps> = ({
 const Modal = React.forwardRef(ModalRender) as ModalStatic;
 const AlertRender: React.ForwardRefRenderFunction<ModalAttrs, AlertProps> = (
   props,
-  ref?: React.Ref<ModalAttrs> | null
+  ref?: React.Ref<ModalAttrs> | null,
 ) => {
   const modal = useRef<ModalAttrs>(null);
 
-  useImperativeHandle(ref, () => ({
-    hide: () => modal.current?.hide(),
-    show: () => modal.current?.show(),
-    toggle: () => modal.current?.toggle(),
-  }), []);
+  useImperativeHandle(
+    ref,
+    () => ({
+      hide: () => modal.current?.hide(),
+      show: () => modal.current?.show(),
+      toggle: () => modal.current?.toggle(),
+    }),
+    [],
+  );
 
   useMount(() => {
     modal.current?.show();
   });
 
-  return <Modal ref={modal} { ...props } />;
+  return <Modal ref={modal} {...props} />;
 };
-const ConfirmRender: React.ForwardRefRenderFunction<ModalAttrs, ConfirmProps> = (
-  props,
-  ref?: React.Ref<ModalAttrs> | null
-) => {
+const ConfirmRender: React.ForwardRefRenderFunction<
+  ModalAttrs,
+  ConfirmProps
+> = (props, ref?: React.Ref<ModalAttrs> | null) => {
   const modal = useRef<ModalAttrs>(null);
 
-  useImperativeHandle(ref, () => ({
-    hide: () => modal.current?.hide(),
-    show: () => modal.current?.show(),
-    toggle: () => modal.current?.toggle(),
-  }), []);
+  useImperativeHandle(
+    ref,
+    () => ({
+      hide: () => modal.current?.hide(),
+      show: () => modal.current?.show(),
+      toggle: () => modal.current?.toggle(),
+    }),
+    [],
+  );
 
   useMount(() => {
     modal.current?.show();
   });
 
-  return <Modal ref={modal} { ...props } showCancel />;
+  return <Modal ref={modal} {...props} showCancel />;
 };
 const Alert = React.forwardRef(AlertRender);
 const Confirm = React.forwardRef(ConfirmRender);
@@ -236,14 +290,15 @@ const Confirm = React.forwardRef(ConfirmRender);
 const alert: ModalStatic['alert'] = (msgOrOpts) => {
   let modal: ModalAttrs | null = null;
 
-  const { content, ...opts } = U.isStr(msgOrOpts) ? { content: msgOrOpts } : msgOrOpts;
+  const { content, ...opts } = U.isStr(msgOrOpts)
+    ? { content: msgOrOpts }
+    : msgOrOpts;
   const props: AlertProps = {
     bodyClassName: 'text-center',
     ...opts,
     children: content,
   };
 
-  const mounter = new Mounter();
   const onRef = (ref: ModalAttrs | null) => {
     modal = ref;
 
@@ -253,26 +308,27 @@ const alert: ModalStatic['alert'] = (msgOrOpts) => {
   const onHidden = () => {
     props.onHidden?.();
 
-    mounter.unmount();
+    unmountPortal.current?.();
   };
 
   const node = React.createElement(Alert, { ...props, onHidden, ref: onRef });
 
-  mounter.mount(node);
+  mountPortal.current?.(node);
 
   return () => modal?.hide();
 };
 const confirm: ModalStatic['confirm'] = (msgOrOpts) => {
   let modal: ModalAttrs | null = null;
 
-  const { content, ...opts } = U.isStr(msgOrOpts) ? { content: msgOrOpts } : msgOrOpts;
+  const { content, ...opts } = U.isStr(msgOrOpts)
+    ? { content: msgOrOpts }
+    : msgOrOpts;
   const props: ConfirmProps = {
     bodyClassName: 'text-center',
     ...opts,
     children: content,
   };
 
-  const mounter = new Mounter();
   const onRef = (ref: ModalAttrs | null) => {
     modal = ref;
 
@@ -282,12 +338,12 @@ const confirm: ModalStatic['confirm'] = (msgOrOpts) => {
   const onHidden = () => {
     props.onHidden?.();
 
-    mounter.unmount();
+    unmountPortal.current?.();
   };
 
   const node = React.createElement(Confirm, { ...props, onHidden, ref: onRef });
 
-  mounter.mount(node);
+  mountPortal.current?.(node);
 
   return () => modal?.hide();
 };
