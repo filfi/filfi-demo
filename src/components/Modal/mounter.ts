@@ -11,7 +11,7 @@ export default class Mounter {
   }
 
   mount(node: React.ReactElement) {
-    document.body.append(this.dom);
+    document.body.appendChild(this.dom);
 
     this.root.render(node);
   }

@@ -78,6 +78,7 @@ export default function Supply() {
             </p>
           </>
         ),
+        cancelText: formatMessage({ id: 'actions.button.cancel' }),
         confirmText: formatMessage({ id: 'notify.collateral.empty.action' }),
         onConfirm: handleCollateral,
       });
@@ -87,6 +88,7 @@ export default function Supply() {
       return Modal.confirm({
         title: formatMessage({ id: 'notify.collateral.limit.title' }),
         content: formatMessage({ id: 'notify.collateral.limit.content' }),
+        cancelText: formatMessage({ id: 'actions.button.cancel' }),
         confirmText: formatMessage({ id: 'notify.collateral.limit.action' }),
         onConfirm: toggleChange,
       });
@@ -176,7 +178,7 @@ export default function Supply() {
                     <div className="col d-flex flex-column">
                       <p className={classNames('mb-0', styles.label)}>
                         <span className="me-1">
-                          <FormattedMessage id="pages.borrow.loan.remain" />
+                          <FormattedMessage id="pages.borrow.loan.rate" />
                         </span>
                         <a
                           className="bi bi-exclamation-circle text-gray"

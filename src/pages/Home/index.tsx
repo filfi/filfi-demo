@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import renderHTML from 'react-render-html';
 import { FormattedMessage, history, useIntl } from '@umijs/max';
 
@@ -54,7 +55,7 @@ export default function Home() {
                 {renderHTML(formatMessage({ id: 'pages.home.borrow.rate' }))}
                 <span className="text-success"> 18.2%</span>
               </p>
-              <p className="mb-0 d-grid">
+              <p className={classNames('mb-0 d-grid', styles.btn)}>
                 <button
                   className="btn btn-dark btn-lg rounded-pill"
                   type="button"
@@ -80,7 +81,7 @@ export default function Home() {
                 {renderHTML(formatMessage({ id: 'pages.home.supply.rate' }))}
                 <span className="text-success"> 20.3%</span>
               </p>
-              <p className="mb-0 d-grid">
+              <p className={classNames('mb-0 d-grid', styles.btn)}>
                 <button
                   className="btn btn-dark btn-lg rounded-pill"
                   type="button"

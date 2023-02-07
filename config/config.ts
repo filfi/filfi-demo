@@ -15,6 +15,7 @@ export default defineConfig({
   layout: false,
   locale: {
     title: true,
+    default: 'en-US',
     useLocalStorage: true,
   },
   request: {},
@@ -32,12 +33,15 @@ export default defineConfig({
             removeViewBox: false,
           },
         },
-      }
+      },
     ],
   },
   npmClient: 'pnpm',
   links: [
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter&display=swap' }
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Inter&display=swap',
+    },
   ],
 });

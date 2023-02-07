@@ -21,7 +21,7 @@ export default {
   'pages.borrow.debts.title': 'Debt Overview',
   'pages.borrow.debts.balance': 'Debt balance',
   'pages.borrow.loan.total': 'Borrow Capacity',
-  'pages.borrow.loan.remain': 'Available to Borrow',
+  'pages.borrow.loan.remain': 'Available Borrow',
   'pages.borrow.loan.rate': 'APY',
   'pages.borrow.form.label.amount': 'Borrow FIL',
   'pages.borrow.form.label.balance': 'Available',
@@ -36,7 +36,7 @@ export default {
   'pages.collateral.node.period': '{days} days to sector expiration',
   'pages.collateral.node.locked': 'Locked ',
   'pages.collateral.actions.release': 'Release Collateral',
-  'pages.collateral.actions.change': 'Adjustment of collateral amount',
+  'pages.collateral.actions.change': 'Adjust',
   'pages.collateral.form.label.rate':
     'Enter the collateralize ratio for pledged coins',
   'pages.collateral.form.label.amount':
