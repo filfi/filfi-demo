@@ -7,7 +7,7 @@ import useWallet from '@/hooks/useWallet';
 import usePageMeta from '@/hooks/usePageMeta';
 import { ReactComponent as Filecoin } from './imgs/filecoin.svg';
 
-export default function Welcome() {
+export default function Home() {
   const { formatMessage } = useIntl();
   const { wallet, connect } = useWallet();
 
@@ -43,7 +43,7 @@ export default function Welcome() {
       <div className="row row-cols-1 row-cols-md-2 g-3 g-lg-4 py-4">
         <div className="col text-center">
           <div
-            className="card flex-fill border-0 rounded-3 shadow text-reset"
+            className="card flex-fill border-0 rounded-3 text-reset"
             style={{ backgroundColor: '#E6EEFA' }}
           >
             <div className="card-body py-4">
@@ -69,7 +69,7 @@ export default function Welcome() {
         </div>
         <div className="col text-center">
           <div
-            className="card flex-fill border-0 rounded-3 shadow text-reset"
+            className="card flex-fill border-0 rounded-3 text-reset"
             style={{ backgroundColor: '#E5F5D0' }}
           >
             <div className="card-body py-4">

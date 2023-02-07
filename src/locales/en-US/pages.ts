@@ -4,7 +4,7 @@ export default {
   'pages.home.borrow.title': 'I have a Filecoin Node',
   'pages.home.borrow.rate':
     'Collateral it and free the pledging<br>Real-time interest rate',
-  'pages.home.supply.title': 'I have some FILs',
+  'pages.home.supply.title': 'I have some FIL',
   'pages.home.supply.rate':
     'Supply them and earn interest<br>Real-time interest rate',
 
